@@ -1,31 +1,49 @@
 import 'package:flutter/material.dart';
-import 'package:great_places/providers/great_places.dart';
-import 'package:great_places/screens/add_place_screen.dart';
+import 'package:great_places/widgets/place_tile.dart';
 import 'package:provider/provider.dart';
+
+import './add_place_screen.dart';
+import '../providers/great_places.dart';
 
 class PlacesListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.grey,
-        appBar: AppBar(title: Text('Visit Places'), actions: [
+      
+      appBar: AppBar(
+        title: Text('Your Places'),
+        actions: <Widget>[
           IconButton(
-            onPressed: () {
-              Navigator.of(context).pushNamed(AddPlaceScreen.route);
-            },
             icon: Icon(Icons.add),
+            onPressed: () {
+              Navigator.of(context).pushNamed(AddPlaceScreen.routeName);
+            },
           ),
-        ]),
-        body: Column(children: [
-          Consumer<GreatPlaces>(
-            child: Center(child: Text('Start your journey !')),
-            builder: (ctx, greatPlaces, child) => greatPlaces.items.length <= 0
-                ? child
-                : ListView.builder(
-                    itemCount: greatPlaces.items.length,
-                    itemBuilder: (ctx, index) => Container(),
-                  ),
-          ),
-        ]));
+        ],
+      ),
+      body: FutureBuilder(
+        future: Provider.of<GreatPlaces>(context, listen: false)
+            .fetchAndSetPlaces(),
+        builder: (ctx, snapshot) => snapshot.connectionState ==
+                ConnectionState.waiting
+            ? Center(
+                child: CircularProgressIndicator(),
+              )
+            : Consumer<GreatPlaces>(
+                child: Center(
+                  child: const Text('Got no places yet, start adding some!'),
+                ),
+                builder: (ctx, greatPlaces, ch) => greatPlaces.items.length <= 0
+                    ? ch
+                    : ListView.builder(
+                        itemCount: greatPlaces.items.length,
+                        itemBuilder: (ctx, i) => PlaceTile(
+                          title : greatPlaces.items[i].title , 
+                          image : greatPlaces.items[i].image , 
+                        ),
+                      ),
+              ),
+      ),
+    );
   }
 }
