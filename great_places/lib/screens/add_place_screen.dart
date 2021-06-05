@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:great_places/widgets/location_input.dart';
 import 'package:provider/provider.dart';
 
 import '../widgets/image_input.dart';
@@ -25,7 +26,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
   void _savePlace() {
     if (_titleController.text.isEmpty || _pickedImage == null) {
       setState(() {
-        _validate = false; 
+        _validate = false;
       });
       return;
     }
@@ -52,9 +53,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                     TextField(
                       decoration: InputDecoration(
                         labelText: 'Title',
-                        errorText: !_validate
-                            ? 'Enter a title '
-                            : null,
+                        errorText: !_validate ? 'Enter a title ' : null,
                       ),
                       controller: _titleController,
                     ),
@@ -62,6 +61,8 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                       height: 10,
                     ),
                     ImageInput(_selectImage),
+                    SizedBox(height: 40),
+                    LocationInput(),
                   ],
                 ),
               ),

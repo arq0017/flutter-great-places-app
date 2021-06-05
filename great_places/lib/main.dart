@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:great_places/screens/mapBox_screen.dart';
 import 'package:provider/provider.dart';
 
 import './providers/great_places.dart';
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
           home: PlacesListScreen(),
           routes: {
             AddPlaceScreen.routeName: (ctx) => AddPlaceScreen(),
+            MapBoxScreen.routeName : (ctx) => MapBoxScreen() , 
           }),
     );
   }
