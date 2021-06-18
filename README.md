@@ -8,6 +8,8 @@ Project - Xb1
 5. Handling error 
 6. Rendering dynamic map with google api 
 
+#### Learnt Adobe XD for UI/UX design 
+
 
 ## APP FRONT UI/UX DESIGN 
 <img width="243" alt="Screenshot 2021-06-18 at 11 39 24 PM" src="https://user-images.githubusercontent.com/70997750/122601233-9a719300-d08e-11eb-92df-a2d4a167d26e.png">
